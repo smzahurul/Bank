@@ -28,7 +28,7 @@
             <div class="col-md-4">
                 <div class="deposit status">
                     <h5>Deposit</h5>
-                    <h2>$00</h2>
+                    <h2>$ <span id="currentDeposit">00</span></h2>
                 </div>
             </div>
             <div class="col-md-4">
@@ -40,7 +40,25 @@
             <div class="col-md-4">
                 <div class="balance status">
                     <h5>Balance</h5>
-                    <h2>$2000</h2>
+                    <h2>$ <span id="currentBalance">2000</span></h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="submit-area">
+                    <h4>Deposit</h4>
+                    <input id="depositAmount" type="text" class="form-control" placeholder="$ Amount Your Deposit" />
+                    <br />
+                    <button id="addDiposit" class="btn btn-success">Deposit</button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="submit-area">
+                    <h4>Withdraw</h4>
+                    <input type="text" class="form-control" placeholder="$ Amount Your Withdraw" />
+                    <br />
+                    <button id="addWithdraw" class="btn btn-success">Withdraw</button>
                 </div>
             </div>
         </div>
@@ -48,12 +66,39 @@
 </body>
 
 <script>
+    //Login Button Event Handler:
     const loginBtn = document.getElementById("login");
     loginBtn.addEventListener("click", function() {
         const loginArea = document.getElementById("login-ariea");
         loginArea.style.display = "none";
         const transactionArea = document.getElementById("transaction-area");
         transactionArea.style.display = "block";
+    });
+
+    //Deposit Button Event Handler:
+    const depositBtn = document.getElementById("addDiposit");
+    depositBtn.addEventListener("click", function() {
+        const depositAmount = document.getElementById("depositAmount").value;
+        const depositNumber = parseFloat(depositAmount);
+        const currentDeposit =
+            document.getElementById("currentDeposit").innerText;
+        const currentDepositNumber = parseFloat(currentDeposit);
+        const totalDeposit = depositNumber + currentDepositNumber;
+
+        document.getElementById("currentDeposit").innerText = totalDeposit;
+        const currentBalance =
+            document.getElementById("currentBalance").innerText;
+
+        const currentBalanceNumber = parseFloat(currentBalance);
+        const totalBalance = depositNumber + currentBalanceNumber;
+        document.getElementById("currentBalance").innerText = totalBalance;
+        document.getElementById("depositAmount").value = "";
+    });
+
+    //Withdraw Button Event Handler:
+    const withdrawBtn = document.getElementById("addWithdraw");
+    withdrawBtn.addEventListener("click", function() {
+        console.log("withdraw click");
     });
 </script>
 
